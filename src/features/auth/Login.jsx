@@ -54,9 +54,9 @@ const Login = () => {
 
     const handlePwdInput = (e) => setPwd(e.target.value)
 
-    const loginContent = isLoading ? 
-        <h1>Loading...</h1> : 
-        (
+    const loginContent = isLoading
+        ? <h1>Loading...</h1>
+        : (
             <section className="login">
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 
