@@ -3,22 +3,24 @@ import { Link } from "react-router-dom";
 
 const UsersList = () => {
     const {
-        data: users,
+        data,
         isLoading,
         isSuccess,
         isError,
         error
     } = useGetUsersQuery()
 
+    console.log(data, isLoading, isSuccess, error)
+
     let usersListContent
     if (isLoading) {
-        usersListContent = <p>"Loading...</p>
+        usersListContent = <p>Loading...</p>
     } else if (isSuccess) {
         usersListContent = (
             <section className="users">
                 <h1>Users List</h1>
                 <ul>
-                    {users.map((user, i) => {
+                    {data.map((user, i) => {
                         return <li key={i}>{user.username}</li>
                     })}
                 </ul>
