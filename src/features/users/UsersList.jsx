@@ -1,25 +1,37 @@
-// import { useGetUsersQuery } from "./usersApiSlice";
-// import { Link } from "react-router-dom";
+import { useGetUsersQuery } from "./usersApiSlice";
+import { Link } from "react-router-dom";
 
-// const UsersList = () => {
-//     const {
-//         data: users,
-//         isLoading,
-//         isSuccess,
-//         isError,
-//         error
-//     } = useGetUsersQuery()
+const UsersList = () => {
+    const {
+        data,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetUsersQuery()
 
-//     let usersList
-//     if(isLoading) {
-//         usersList = <p>"Loading...</p>
-//     } else if (isSuccess) {
-//         usersList
-//     }
+    console.log(data, isLoading, isSuccess, error)
 
-//   return (
-//     <div>UsersList</div>
-//   )
-// }
+    let usersListContent
+    if (isLoading) {
+        usersListContent = <p>Loading...</p>
+    } else if (isSuccess) {
+        usersListContent = (
+            <section className="users">
+                <h1>Users List</h1>
+                <ul>
+                    {data.map((user, i) => {
+                        return <li key={i}>{user.username}</li>
+                    })}
+                </ul>
+                <Link to='/welcome'>Back to Welcome</Link>
+            </section>
+        )
+    } else if (isError) {
+        usersListContent = <p>{JSON.stringify(error)}</p>
+    }
 
-// export default UsersList
+    return usersListContent
+}
+
+export default UsersList
